@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Gura Game</title>
+    <style>
+   
+html {
+
+    background-image: url("https://i.redd.it/gf25s4tgg5n51.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed; 
+}
+
+      #game {
+        width: 400px;
+        height: 400px;
+        margin: 0 auto;
+        position: relative;
+      }
+      
+      #Gura {
+        width: 200px;
+        height: 220px;
+        background-image: url("https://static.miraheze.org/hololivewiki/thumb/e/e6/Gawr_Gura_-_Portrait_VR_01.png/290px-Gawr_Gura_-_Portrait_VR_01.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        
+      }
+      
+      #shrimp {
+        width: 200px;
+        height: 220px;
+        background-image: url("https://images.emojiterra.com/google/android-nougat/512px/1f990.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        -webkit-box-shadow: 0.6rem 0.6rem 1rem rgb(225, 120, 0);
+    box-shadow: 0.6rem 0.6rem 1rem rgb(255, 123, 0);
+      }
+    </style>
+  </head>
+  <body onload="startGame()">
+    <div id="game">
+      <div id="Gura"></div>
+      <div id="shrimp"></div>
+    </div>
+    <script>
+      var Gura;
+      var shrimp;
+      var GuraX;
+      var GuraY;
+      var shrimpX;
+      var shrimpY;
+      var gameInterval;
+      
+      function startGame() {
+        
+        Gura = document.getElementById("Gura");
+        shrimp = document.getElementById("shrimp");
+        
+        GuraX = 0;
+        GuraY = 0;
+        shrimpX = Math.floor(Math.random() * 390);
+        shrimpY = Math.floor(Math.random() * 390);
+        Gura.style.left = GuraX + "px";
+        Gura.style.top = GuraY + "px";
+        shrimp.style.left = shrimpX + "px";
+        shrimp.style.top = shrimpY + "px";
+        
+        // Start game loop
+        gameInterval = setInterval(moveGura, 100);
+        
+        // Move Gura on arrow key press
+        document.onkeydown = function(e) {
+          switch (e.keyCode) {
+            case 37:
+              GuraX -= 10;
+              break;
+            case 38:
+              GuraY -= 10;
+              break;
+            case 39:
+              GuraX += 10;
+              break;
+            case 40:
+              GuraY += 10;
+              break;
+          }
+          Gura.style.left = GuraX + "px";
+          Gura.style.top = GuraY + "px";
+        }
+      }
+      
+      function moveGura() {
+        
+        if (GuraX == shrimpX && GuraY == shrimpY) {
+          shrimpX = Math.floor(Math.random() * 390);
+          shrimpY = Math.floor(Math.random() * 390);
+          shrimp.style.left = shrimpX + "px";
+          shrimp.style.top = shrimpY + "px";
+        }
+      }
+    </script>
+  </body>
+</html>
